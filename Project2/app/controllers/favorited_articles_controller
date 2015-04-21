@@ -1,0 +1,3 @@
+class FavoritedArticlesController < ApplicationController::Base
+
+end
