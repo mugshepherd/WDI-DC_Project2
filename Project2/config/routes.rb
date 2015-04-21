@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :path => 'accounts'
+
+  get '/', to: 'articles#index'
+  get '/search', to: 'articles#search'
+
+  resources :users
+  resources :articles
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
