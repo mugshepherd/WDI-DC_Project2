@@ -5,6 +5,8 @@ class CreateArticles < ActiveRecord::Migration
       t.text :link
       t.text :description
       t.text :guid
+      t.decimal :xcoor
+      t.decimal :ycoor
 
       t.timestamps null: false
     end

@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20150421160827) do
     t.text     "link"
     t.text     "description"
     t.text     "guid"
+    t.decimal  "xcoor"
+    t.decimal  "ycoor"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

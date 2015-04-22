@@ -1,22 +1,24 @@
-class ArticlesController < ApplicationController::Base
+class ArticlesController < ApplicationController
   def index
+    @articles = Article.all
+	end
 
-  	end
+	def show
+		@article = Article.find( params[:id] )
 
-  	def show
-  		@article = Article.find(params[:id])
-      @user =
-  	end
+	end
 
-  	def search
-  		# @article = Article.new
-  		search_array = params[:search].split(' ')
-  		search_array.join('+')
-  		@movie_search = HTTParty.get("http://api.usatoday.com/open/articles?keyword=#{params[:search]}&api_key=zjus29nccyrk765qc4sfz8qa")
-  	end
+	def search
+    secret_key = ENV['usa_today_api_key']
+		# @article = Article.new
+		# search_array = params[:search].split(' ')
+		# search_array.join('+')
+		@articles = HTTParty.get("http://api.usatoday.com/open/articles?keyword=#{params[:search]}&api_key=#{secret_key}")
+	end
 
-    def favorite
-      @article = Article.find(params[:id])
-      @user = User.find(params[:id])
-
+  def favorites
+    @article = current_user.favorite_articles
+    render :index
   end
+
+end

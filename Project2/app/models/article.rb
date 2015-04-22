@@ -7,11 +7,8 @@ class Article < ActiveRecord::Base
 		search_array = params[:search].split(' ')
 		search_array.join('+')
 		@article_search =
-     HTTParty.get("http://api.usatoday.com/open/articles?keyword=#{params[:search]}&api_key=zjus29nccyrk765qc4sfz8qa")
-
-
-
-end
+     HTTParty.get("http://api.usatoday.com/open/articles?keyword=#{params[:search]}&api_key=ENV['project2_api_key']")
+  end
 
 
 end
