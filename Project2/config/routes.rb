@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, :path => 'accounts'
 
   get '/', to: 'articles#index'
+  get '/articles/breaking', to: 'articles#breaking'
   get '/search', to: 'articles#search'
+
 
   resources :users
   resources :articles

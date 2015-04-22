@@ -6,19 +6,22 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-topnews_key = "zjus29nccyrk765qc4sfz8qa"
-articles_key = "phj2arhpxw9hjuqyfsw27ksc"
 
-topnews_example = "http://api.usatoday.com/open/articles/topnews?api_key=" + topnews_key
+secret_key_articles = ENV['usa_today_articles_api_key']
+
+
+news_seed_data = "http://api.usatoday.com/open/articles/topnews?api_key=" + secret_key_articles  #this api link is for use with 'articles' key, not breaking news
 
 def random_coord(min, max)
  rand * (max-min) + min
 end
+# binding.pry
 
-api_response = HTTParty.get(topnews_example)["rss"]["channel"]["item"]
+api_response = HTTParty.get(news_seed_data)
+  api_items = api_response["rss"]["channel"]["item"]
 
-api_response.each do |article|
-  # puts article["guid"]["__content__"].inspect
+api_items.each do |article|
+  # puts article["guid"]["__content__"].inspect #uncomment this line and comment 'Article.create... lines following if not able to pull from API to ensure that connection is working'
   Article.create ({
     :title => article["title"],
     :description => article["description"],

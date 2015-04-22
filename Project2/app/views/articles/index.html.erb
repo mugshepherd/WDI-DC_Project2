@@ -1,10 +1,10 @@
 <h1>Top Articles</h1>
 
-  <% @articles.each do |article| %>
-  <%= link_to(article["title"], article["guid"], :target => "_blank") %>
-  <p>Description: <%= article["description"] %></p>
+   @articles.each do |article| 
+  = link_to(article["title"], article["guid"], :target => "_blank")
+  <p>Description: = article["description"] </p>
 
-  <!-- <li> <%= link_to article.title, article_path( article.id ) %></li> -->
-  <!-- <p><%= link_to %> -->
-  <!-- <%=  article.id  %> -->
-  <% end %>
+  <!-- <li> = link_to article.title, article_path( article.id ) </li> -->
+  <!-- <p>= link_to  -->
+  <!-- =  article.id   -->
+   end

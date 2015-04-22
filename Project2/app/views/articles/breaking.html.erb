@@ -821,8 +821,6 @@ var me = document.getElementById('animated-site-logo-dot-link');
             <div class="hfwmm-primary-wrap hfwmm-4uphp-primary-wrap hero">
               <!-- Begin map area -->
               <h1>This is where the map goes. See line #823 in the code</h1>
-            <!-- <%= render 'map' %> -->
-
             </div>
 
             <p class=
@@ -831,15 +829,11 @@ var me = document.getElementById('animated-site-logo-dot-link');
             <ul class="hfwmm-list hfwmm-4uphp-list hfwmm-light-list" data-track-prefix="flex4uphphero">
 
               <!-- Begin article/image nav example code. Replace these examples with a loop over the first three article database items -->
-
-              <% @articles.each do |article| %> #use this for first three
-
-
               <li class= "hfwmm-item hfwmm-secondary-item hfwmm-item-2 money-theme-bg hfwmm-first-secondary-item hfwmm-4uphp-secondary-item">
               <a class="hfwmm-list-link hfwmm-light-list-link hfwmm-image-link hfwmm-secondary-link"
                 data-ht="flex4uphpherostack1"
                 data-track-display-type="thumb"
-                href= "<%= article.link %>">
+                href= "ex1.html">
               <span class="hfwmm-image-gradient hfwmm-secondary-image-gradient"></span>
               <span class="theme-bg-ssts-label hfwmm-ssts-label-top-left hfwmm-ssts-label-secondary money-theme-bg">
                 Green Category
@@ -856,8 +850,50 @@ var me = document.getElementById('animated-site-logo-dot-link');
               </span>
               </a>
               </li>
-              <% end %>
 
+              <li class= "hfwmm-item hfwmm-secondary-item hfwmm-item-2 money-theme-bg hfwmm-first-secondary-item hfwmm-4uphp-secondary-item">
+              <a class="hfwmm-list-link hfwmm-light-list-link hfwmm-image-link hfwmm-secondary-link"
+                data-ht="flex4uphpherostack1"
+                data-track-display-type="thumb"
+                href= "ex2.html">
+              <span class="hfwmm-image-gradient hfwmm-secondary-image-gradient"></span>
+              <span class="theme-bg-ssts-label hfwmm-ssts-label-top-left hfwmm-ssts-label-secondary news-theme-bg">
+                Blue Category
+              </span>
+              <img alt="Image alt" class="hfwmm-image hfwmm-secondary-image"
+                data-id="26149895"
+                src= "https://dl.dropboxusercontent.com/u/7989543/general_assembly_logo/GeneralAssemblylogoBlue.gif">
+              <span class="hfwmm-secondary-hed-wrap hfwmm-secondary-text-hed-wrap">
+                <span class="hfwmm-secondary-text-hed-icon"></span>
+                <span class="hfwmm-list-hed hfwmm-secondary-hed"
+                  title="See line 835 for the li template to use for articles with image (this navbar)">
+                  See line 830 for the li template to use for items in this nav section
+                </span>
+              </span>
+              </a>
+              </li>
+
+              <li class= "hfwmm-item hfwmm-secondary-item hfwmm-item-2 money-theme-bg hfwmm-first-secondary-item hfwmm-4uphp-secondary-item">
+              <a class="hfwmm-list-link hfwmm-light-list-link hfwmm-image-link hfwmm-secondary-link"
+                data-ht="flex4uphpherostack1"
+                data-track-display-type="thumb"
+                href= "ex3.html">
+              <span class="hfwmm-image-gradient hfwmm-secondary-image-gradient"></span>
+              <span class="theme-bg-ssts-label hfwmm-ssts-label-top-left hfwmm-ssts-label-secondary life-theme-bg">
+                Pink Category
+              </span>
+              <img alt="Image alt" class="hfwmm-image hfwmm-secondary-image"
+                data-id="26149895"
+                src= "https://dl.dropboxusercontent.com/u/7989543/general_assembly_logo/GeneralAssemblylogoPink.gif">
+              <span class="hfwmm-secondary-hed-wrap hfwmm-secondary-text-hed-wrap">
+                <span class="hfwmm-secondary-text-hed-icon"></span>
+                <span class="hfwmm-list-hed hfwmm-secondary-hed"
+                  title="Simply take the first three articles from the results list search results, and loop them into the template set up on line 835">
+                  Simply take the first three articles from the API search results, and loop them into the template shown on line 835
+                </span>
+              </span>
+              </a>
+              </li>
 
               <!-- Begin article without image nav example code. Replace these examples with a loop over the next nine article database items -->
               <li class="hfwmm-item hfwmm-tertiary-item hfwmm-item-5 news-theme-bg hfwmm-first-tertiary-item hfwmm-4uphp-tertiary-item">
@@ -869,8 +905,6 @@ var me = document.getElementById('animated-site-logo-dot-link');
                 title="This is an article link with no image">This is a less exciting article link</span></a>
               </li>
 
-
-#loop here
               <li class="hfwmm-item hfwmm-tertiary-item hfwmm-item-6 money-theme-bg hfwmm-4uphp-tertiary-item">
               <a class="hfwmm-list-link hfwmm-light-list-link hfwmm-tertiary-link"
                 data-ht="flex4uphpherostack4"
