@@ -1,0 +1,32 @@
+<div id="map"></div>
+<style>
+  body { margin:0; padding:0; }
+  #box { background-color: red; height: 350px; width: 750px; margin:auto; }
+  #map { height:100%; }
+</style>
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoibmJ1bWJhcmdlciIsImEiOiIwdlI1ZnlzIn0.XLgYFawoWHOeHLWnzuqQuw';
+var map = L.mapbox.map('map', 'examples.map-i86nkdio')
+var myLayer = L.mapbox.featureLayer().addTo(map);
+var features = [];
+<% @articles.each do |article| %>
+features.push({
+  type: 'Feature',
+  geometry: {
+    type: 'Point',
+    coordinates: [<%= article.ycoor %>,<%= article.xcoor %>]
+    },
+  properties: {
+    title: '<%= article.title %>',
+    description: '<%= article.description %>',
+    'marker-color': '#000',
+    'marker-symbol': 'star-stroked',
+    }
+});
+<% end %>
+myLayer.setGeoJSON({
+    type: 'FeatureCollection',
+    features: features
+});
+map.setView([41, -75], 6)
+</script>
