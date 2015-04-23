@@ -1,10 +1,38 @@
-<h1>Top Articles</h1>
+<% li_class = "hfwmm-first-secondary-item hfwmm-4uphp-secondary-item" %>
+<% @articles[0..2].each do |article| %>
+  <li class= "hfwmm-item hfwmm-secondary-item hfwmm-item-2 money-theme-bg <%li_class%>">
+  <a class="hfwmm-list-link hfwmm-light-list-link hfwmm-image-link hfwmm-secondary-link"
+    data-ht="flex4uphpherostack1"
+    data-track-display-type="thumb"
+    href= "<%=article.link%>">
+  <span class="hfwmm-image-gradient hfwmm-secondary-image-gradient"></span>
+  <span class="theme-bg-ssts-label hfwmm-ssts-label-top-left hfwmm-ssts-label-secondary money-theme-bg">
+    <%=article.section%>
+  </span>
+  <img alt="<%=article.title%>" class="hfwmm-image hfwmm-secondary-image"
+    data-id="26149895"
+    src= "<%=article.image_url%>" >
+  <span class="hfwmm-secondary-hed-wrap hfwmm-secondary-text-hed-wrap">
+    <span class="hfwmm-secondary-text-hed-icon"></span>
+    <span class="hfwmm-list-hed hfwmm-secondary-hed"
+      title="<%=article.title%>">
+      <%=article.title%>
+    </span>
+  </span>
+  </a>
+  </li>
+  <% li_class = "hfwmm-first-secondary-item hfwmm-4uphp-secondary-itemm" %>
+  <% end %>
 
-   @articles.each do |article| 
-  = link_to(article["title"], article["guid"], :target => "_blank")
-  <p>Description: = article["description"] </p>
-
-  <!-- <li> = link_to article.title, article_path( article.id ) </li> -->
-  <!-- <p>= link_to  -->
-  <!-- =  article.id   -->
-   end
+<% li_class = "hfwmm-first-tertiary-item hfwmm-4uphp-tertiary-item" %>
+<% @articles[4..12].each do |article| %>
+  <li class="hfwmm-item hfwmm-tertiary-item hfwmm-item-5 news-theme-bg <%=li_class%>">
+  <a class="hfwmm-list-link hfwmm-light-list-link hfwmm-tertiary-link"
+    data-ht="flex4uphpherostack4"
+    data-track-display-type="stack"
+    href="<%=article.link%>">
+    <span class="hfwmm-list-hed hfwmm-tertiary-hed"
+    title="<%=article.title%>"><%=article.title%></span></a>
+  </li>
+  <% li_class = "hfwmm-4uphp-tertiary-item" %>
+  <% end %>
