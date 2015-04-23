@@ -1,6 +1,4 @@
 class Article < ActiveRecord::Base
-  @@api_key = ENV['usa_today_articles_api_key']
-
   has_many :favorited_articles
   has_many :users, through: :favorited_articles
 
@@ -21,8 +19,10 @@ class Article < ActiveRecord::Base
     end
   end
 
+  #TODO: remove duplicate methods (get_news, add_metadata, etc)
+
   def self.get_topnews
-    query = "http://api.usatoday.com/open/articles/topnews?count=13&api_key=" + @@api_key
+    query = "http://api.usatoday.com/open/articles/topnews?count=13&api_key=" + ENV['usa_today_articles_api_key']
     get_news(query)
   end
 
@@ -68,11 +68,6 @@ class Article < ActiveRecord::Base
        })
     end
   end
-
-   def self.get_topnews
-     query = "http://api.usatoday.com/open/articles/topnews?count=10&api_key=" + api_key
-     get_news(query)
-   end
 
    def add_metadata
      page_link = self.link.chomp("/") + ".json"
