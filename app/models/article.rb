@@ -1,28 +1,28 @@
 class Article < ActiveRecord::Base
+  @@api_key = ENV['usa_today_articles_api_key']
+
   has_many :favorited_articles
   has_many :users, through: :favorited_articles
 
-  def self.get_news (query)
-    def self.random_coord(min, max)
-      rand * (max-min) + min
-    end
-    response = HTTParty.get(query)
-    news = response["rss"]["channel"]["item"]
-    news.each do |article|
-      create ({
-        :title => article["title"],
-        :description => article["description"],
-        :link => article["link"],
-        :xcoor => random_coord(37, 45),
-        :ycoor => random_coord(-79, -70)
-        })
+def self.get_news (query)
+  def self.random_coord(min, max)
+    rand * (max-min) + min
+  end
+  response = HTTParty.get(query)
+  news = response["rss"]["channel"]["item"]
+  news.each do |article|
+    create ({
+      :title => article["title"],
+      :description => article["description"],
+      :link => article["link"],
+      :xcoor => random_coord(37, 45),
+      :ycoor => random_coord(-79, -70)
+      })
     end
   end
 
-  #TODO: remove duplicate methods (get_news, add_metadata, etc)
-
   def self.get_topnews
-    query = "http://api.usatoday.com/open/articles/topnews?count=13&api_key=" + ENV['usa_today_articles_api_key']
+    query = "http://api.usatoday.com/open/articles/topnews?count=13&api_key=" + @@api_key
     get_news(query)
   end
 
@@ -46,34 +46,5 @@ class Article < ActiveRecord::Base
       update(image_url: "https://dl.dropboxusercontent.com/u/7989543/general_assembly_logo/GeneralAssemblylogoRed.gif")
     end
   end
-
-
-  def self.random_coord(min, max)
-   rand * (max-min) + min
-  end
-
-
-  def self.get_news (query)
-   api_key = ENV['usa_today_articles_api_key']
-   response = HTTParty.get(query)
-
-   news  = response["rss"]["channel"]["item"]
-   news.each do |article|
-     create ({
-       :title => article["title"],
-       :description => article["description"],
-       :link => article["link"],
-       :xcoor => random_coord(37, 45),
-       :ycoor => random_coord(-79, -70)
-       })
-    end
-  end
-
-   def add_metadata
-     page_link = self.link.chomp("/") + ".json"
-     json = HTTParty.get(page_link)
-     small_image_url = json["assets"]["items"]["smallbasename"]
-
-   end
 
 end
