@@ -10,7 +10,7 @@ class Article < ActiveRecord::Base
     end
     #Query USA Today's article API for the first n articles of a given news section
     base_url = "http://api.usatoday.com/open/articles/topnews/"
-    query = "#{base_url}/#{section}?count=#{count}&api_key=#{@@api_key}"
+    query = "#{base_url}/#{section}?count=#{count}&api_key=#{ENV['usa_today_articles_api_key']}"
     response = HTTParty.get(query)
     #Extract list of article metadata from article API's JSON response
     news = response["rss"]["channel"]["item"]
