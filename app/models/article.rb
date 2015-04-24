@@ -3,39 +3,47 @@ class Article < ActiveRecord::Base
 
   has_many :favorited_articles
   has_many :users, through: :favorited_articles
+  default_scope {order('updated_at DESC')}
 
-def self.get_news (query)
-  def self.random_coord(min, max)
-    rand * (max-min) + min
-  end
-  response = HTTParty.get(query)
-  news = response["rss"]["channel"]["item"]
-  news.each do |article|
-    create ({
-      :title => article["title"],
-      :description => article["description"],
-      :link => article["link"],
-      :xcoor => random_coord(37, 45),
-      :ycoor => random_coord(-79, -70)
-      })
+  def self.get_news(section="news", count=15)
+    #Generate random coordinates within a given range
+    def self.random_coord(min, max)
+      rand * (max-min) + min
+    end
+    #Query USA Today's article API for the first n articles of a given news section
+    base_url = "http://api.usatoday.com/open/articles/topnews/"
+    query = "#{base_url}/#{section}?count=#{count}&api_key=#{ENV['usa_today_articles_api_key']}"
+    response = HTTParty.get(query)
+    #Extract list of article metadata from article API's JSON response
+    news = response["rss"]["channel"]["item"]
+    #Check if articles exist in database. If they don't,
+    #add their metadata and generate random coordinates
+    news.each do |article|
+      link = article["link"]
+      if Article.exists?(link: link)
+        article = Article.where(link: link).first.update(updated_at: Time.zone.now)
+      else
+        new_article = create ({
+          title: article["title"],
+          description: article["description"],
+          link: link,
+          xcoor: random_coord(37, 45),
+          ycoor: random_coord(-79, -70)
+        })
+        #Add extra metadata (article image and section tag) from the full JSON for each link
+        new_article.add_metadata
+      end
     end
   end
 
-  def self.get_topnews
-    query = "http://api.usatoday.com/open/articles/topnews?count=13&api_key=" + @@api_key
-    get_news(query)
-  end
-
-  def self.add_metadata_all
-    all.each do |article|
-      article.add_metadata
-    end
-  end
+  #Add extra article image and section metadata using the full JSON for a given article
 
   def add_metadata
     page_link = link.chomp("/") + ".json"
     site = page_link.split("/")[2].downcase
-    if site == "www.usatoday.com"
+    #If link is a USA Today site, extract image url from its JSON, get the news category
+    #from the URL structure, and update database entry with extra metadata
+    if site == "www.usatoday.com" && page_link.split("/")[3] == "story"
       json = HTTParty.get(page_link)
       image_name = json["metadata_modules"][0]["asset_metadata"]["items"]["smallbasename"]
       image_baseurl = json["metadata_modules"][0]["asset_metadata"]["items"]["publishurl"]
@@ -43,7 +51,9 @@ def self.get_news (query)
       section = page_link.split("/")[5]
       update(image_url: image_url, section: section)
     else
-      update(image_url: "https://dl.dropboxusercontent.com/u/7989543/general_assembly_logo/GeneralAssemblylogoRed.gif")
+      #If link not on USA Today domain, add placeholder image and category
+      update(image_url: "https://dl.dropboxusercontent.com/u/7989543/general_assembly_logo/GeneralAssemblylogo.jpg",
+             section: "External Link")
     end
   end
 

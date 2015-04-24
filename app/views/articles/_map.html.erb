@@ -9,7 +9,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoibmJ1bWJhcmdlciIsImEiOiIwdlI1ZnlzIn0.XLgYFawoW
 var map = L.mapbox.map('map', 'examples.map-i86nkdio')
 var myLayer = L.mapbox.featureLayer().addTo(map);
 var features = [];
-<% @articles.each do |article| %>
+<% @articles[0..12].each do |article| %>
 features.push({
   type: 'Feature',
   geometry: {
