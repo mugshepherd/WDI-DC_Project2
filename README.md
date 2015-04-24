@@ -1,8 +1,9 @@
 # WDI-DC_Project2
 A repository to house work related to the second project for the Web Development Course at GA/DC
 
+**Challenge:  Adding search by geolocation functionality to USA-Today website**
 
-##Challenge:  Adding search by geolocation functionality to USA-Today website
+proof of concept:  https://blooming-bayou-2574.herokuapp.com
 
 
 ##User Stories:  
