@@ -1,6 +1,5 @@
 class Article < ActiveRecord::Base
-  #@@api_key = ENV['usa_today_articles_api_key']
-  @@api_key = 'h74rdr9ap2xkxnx7scpsmmp6'
+  @@api_key = ENV['usa_today_articles_api_key']
 
   has_many :favorited_articles
   has_many :users, through: :favorited_articles
