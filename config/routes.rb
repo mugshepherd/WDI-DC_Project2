@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'articles#news'
   get  'articles/news', 'articles/sports', 'articles/life', 'articles/money',
-       'articles/tech', 'articles/travel', 'articles/opinion', 'articles/weather'
+       'articles/tech', 'articles/travel', 'articles/opinion'
   resources :users
   resources :articles
 
