@@ -1,9 +1,12 @@
-# WDI-DC_Project2
+#USA Today Spatial Reimagining
+## WDI-DC_Project2
+###Note: Since this application was published, USA Today has changed their static assets and the structure of their *hidden* article JSON feature. As a result, this little proof of concept is in quite a bit of disarray. Please bear with us while we take the lesson (don't rely on the static assets of others) to heart and attempt to rebuild.
+
 A repository to house work related to the second project for the Web Development Course at GA/DC
 
 **Challenge:  Adding search by geolocation functionality to USA-Today website**
 
-proof of concept:  https://blooming-bayou-2574.herokuapp.com
+proof of concept:  https://usatoday-spatialreimagining.herokuapp.com
 
 
 ##User Stories:  
