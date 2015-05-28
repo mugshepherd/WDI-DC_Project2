@@ -1,5 +1,6 @@
 class Article < ActiveRecord::Base
-  @@api_key = ENV['usa_today_articles_api_key']
+  #quickfix
+  @@api_key = "h74rdr9ap2xkxnx7scpsmmp6"
 
   has_many :favorited_articles
   has_many :users, through: :favorited_articles
@@ -14,11 +15,16 @@ class Article < ActiveRecord::Base
     base_url = "http://api.usatoday.com/open/articles/topnews/"
     query = "#{base_url}/#{section}?count=#{count}&api_key=#{@@api_key}"
     response = HTTParty.get(query)
+    # puts response
     #Extract list of article metadata from article API's JSON response
     news = response["rss"]["channel"]["item"]
     #Check if articles exist in database. If they don't,
     #add their metadata and generate random coordinates
-    news.each do |article|
+
+    #BAD BAD BAD!!!! This is a quick 2-minute fix for times when USA today is serving only one article, and should not be used in production!!
+    begin
+    if news["link"]
+      article = news
       link = article["link"]
       if Article.exists?(link: link)
         article = Article.where(link: link).first.update(updated_at: Time.zone.now)
@@ -34,9 +40,30 @@ class Article < ActiveRecord::Base
         new_article.add_metadata
       end
     end
+rescue
+
+    else
+      news.each do |article|
+        link = article["link"]
+        if Article.exists?(link: link)
+          article = Article.where(link: link).first.update(updated_at: Time.zone.now)
+        else
+          new_article = create ({
+            title: article["title"],
+            description: article["description"],
+            link: link,
+            xcoor: random_coord(37, 45),
+            ycoor: random_coord(-79, -70)
+          })
+          #Add extra metadata (article image and section tag) from the full JSON for each link
+          new_article.add_metadata
+        end
+      end
+    end
   end
 
   #Add extra article image and section metadata using the full JSON for a given article
+
   def add_metadata
     page_link = link.chomp("/") + ".json"
     site = page_link.split("/")[2].downcase
