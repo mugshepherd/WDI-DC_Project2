@@ -6,8 +6,7 @@ A repository to house work related to the second project for the Web Development
 
 **Challenge:  Adding search by geolocation functionality to USA-Today website**
 
-original proof of concept:  https://blooming-bayou-2574.herokuapp.com  (linked CSS no longer available)
-updated proof of concept:  https://usatoday-spatialreimagining.herokuapp.com
+online:  http://blooming-bayou-2574.herokuapp.com
 
 
 ##User Stories:  
