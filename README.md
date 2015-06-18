@@ -6,7 +6,8 @@ A repository to house work related to the second project for the Web Development
 
 **Challenge:  Adding search by geolocation functionality to USA-Today website**
 
-online:  http://blooming-bayou-2574.herokuapp.com
+online:  http://spatial-usatoday.herokuapp.com/ 
+*note that the url must be http, and not https*
 
 
 ##User Stories:  
